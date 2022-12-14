@@ -3,6 +3,22 @@ const express= require("express");
 const router=express.Router();
 const usermodel=require("../model/usermodel");
 
+
+
+router.get("/",(req,res,next)=>{
+    usermodel.find().then((result)=>{
+        res.status(200).json(result)
+    })
+
+
+    .catch(err=>{
+        res.status(500).json({
+            err
+        });
+    }
+    )
+    })
+
 //post  OR insert
 router.post("/",async(req,res)=>{
     const newuser= new usermodel(req.body);
